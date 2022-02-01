@@ -5,6 +5,7 @@ import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -20,16 +21,10 @@ public class CarService {
         cars.add(new Car("Lexus", 2017, "Japan"));
     }
 
-    public List<Car> peopleList(int count){
-        List<Car> listOfCars = new ArrayList<>();
-        int a = 0;
+    public List<Car> carList(int count){
         if (count >= 5){
             return cars;
         }
-        while (a != count) {
-            listOfCars.add(cars.get(a));
-            a++;
-        }
-        return listOfCars;
+        return cars.stream().limit(count).collect(Collectors.toList());
     }
 }
